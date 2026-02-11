@@ -46,7 +46,7 @@ export default function VehicleValueTab() {
           background: 'linear-gradient(180deg, #111d33 0%, #0f1a2e 100%)',
         }}
       >
-        <p className="text-[10px] text-gray-500 tracking-[0.25em] font-semibold mb-5">
+        <p className="text-[10px] text-gray-700 tracking-[0.25em] font-semibold mb-5">
           VEHICLE TRUST GRADE
         </p>
 
@@ -105,12 +105,12 @@ export default function VehicleValueTab() {
           >
             <div className="flex items-center gap-1.5 mb-1">
               <span className="text-xs">{m.icon}</span>
-              <span className="text-[10px] text-gray-500">{m.label}</span>
+              <span className="text-[10px] text-gray-700">{m.label}</span>
             </div>
             <p className="text-lg font-bold text-gray-100 leading-tight">
               {m.value}
               {m.unit && (
-                <span className="text-[10px] font-normal text-gray-500 ml-0.5">
+                <span className="text-[10px] font-normal text-gray-700 ml-0.5">
                   {m.unit}
                 </span>
               )}
@@ -136,10 +136,10 @@ export default function VehicleValueTab() {
               <p className="text-lg font-extrabold text-gray-100 leading-none">
                 {m.value}
                 {m.unit && (
-                  <span className="text-[9px] font-normal text-gray-500">{m.unit}</span>
+                  <span className="text-[9px] font-normal text-gray-700">{m.unit}</span>
                 )}
               </p>
-              <p className="text-[9px] text-gray-500 leading-tight">{m.label}</p>
+              <p className="text-[9px] text-gray-700 leading-tight">{m.label}</p>
             </div>
           ))}
         </div>
@@ -165,7 +165,7 @@ export default function VehicleValueTab() {
           </span>
         </div>
 
-        <p className="text-center text-[11px] text-gray-500 mb-4">
+        <p className="text-center text-[11px] text-gray-700 mb-4">
           잔존 가치율{' '}
           <span className="text-gray-300 font-semibold">72%</span> · 동급 평균
           대비{' '}
@@ -207,7 +207,7 @@ export default function VehicleValueTab() {
 
         {/* 합산 */}
         <div className="mt-3 pt-3 border-t border-white/[0.04] flex items-center justify-between">
-          <span className="text-xs text-gray-500">총 가치 상승 효과</span>
+          <span className="text-xs text-gray-700">총 가치 상승 효과</span>
           <span className="text-sm font-extrabold text-ivi-accent">+415만원</span>
         </div>
       </div>
@@ -260,10 +260,10 @@ function PriceCell({ label, value, highlighted, muted }: PriceCellProps) {
           : 'bg-ivi-bg border-white/[0.04]'
       }`}
     >
-      <p className="text-[9px] text-gray-500 mb-1">{label}</p>
+      <p className="text-[9px] text-gray-700 mb-1">{label}</p>
       <p
         className={`text-[11px] font-bold leading-tight ${
-          muted ? 'text-gray-400' : 'text-ivi-accent'
+          muted ? 'text-gray-700' : 'text-ivi-accent'
         }`}
       >
         {value}

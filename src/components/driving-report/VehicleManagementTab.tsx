@@ -172,11 +172,11 @@ export default function VehicleManagementTab() {
             <div className="flex items-center justify-between">
               <div className="flex items-baseline gap-3">
                 <span className="text-5xl font-black text-ivi-accent">94</span>
-                <span className="text-2xl font-bold text-gray-400">%</span>
+                <span className="text-2xl font-bold text-gray-700">%</span>
               </div>
               <div className="text-right">
                 <p className="text-sm font-bold text-gray-600">양호</p>
-                <p className="text-xs text-gray-500 mt-1">72.8 / 77.4 kWh</p>
+                <p className="text-xs text-gray-700 mt-1">72.8 / 77.4 kWh</p>
               </div>
             </div>
             <button
@@ -231,7 +231,7 @@ export default function VehicleManagementTab() {
                       <p className="text-sm font-bold text-gray-900">
                         {dt.month}.{dt.day}
                       </p>
-                      <p className="text-xs text-gray-500 mt-0.5">
+                      <p className="text-xs text-gray-700 mt-0.5">
                         {dt.year}
                       </p>
                     </div>
@@ -241,7 +241,7 @@ export default function VehicleManagementTab() {
                       <p className="text-sm font-bold text-gray-900 truncate">
                         {summarizeItems(rec.items)}
                       </p>
-                      <p className="text-xs text-gray-500 truncate mt-0.5">
+                      <p className="text-xs text-gray-700 truncate mt-0.5">
                         {rec.center}
                       </p>
                     </div>
@@ -255,7 +255,7 @@ export default function VehicleManagementTab() {
                         width="16" height="16" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" strokeWidth="2"
                         strokeLinecap="round" strokeLinejoin="round"
-                        className={`text-gray-400 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                        className={`text-gray-700 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
                       >
                         <polyline points="6 9 12 15 18 9" />
                       </svg>

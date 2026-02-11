@@ -333,7 +333,7 @@ export default function WeeklyChart({
                   )}
                   <span
                     className={`text-[8px] ${
-                      isSelected ? 'text-gray-400' : 'text-gray-700'
+                      isSelected ? 'text-gray-700' : 'text-gray-700'
                     }`}
                   >
                     {dateLabels[i]}
@@ -410,7 +410,7 @@ export default function WeeklyChart({
                   )}
                   <span
                     className={`text-[8px] ${
-                      isSelected ? 'text-gray-400' : 'text-gray-700'
+                      isSelected ? 'text-gray-700' : 'text-gray-700'
                     }`}
                   >
                     {dateLabels[i]}

@@ -82,7 +82,7 @@ export default function DrivingReportPage() {
           <div className="flex items-center justify-between mb-5">
             {/* 좌측 */}
             <div>
-              <p className="text-[11px] text-gray-500 font-bold uppercase tracking-wider mb-1">
+              <p className="text-[11px] text-gray-700 font-bold uppercase tracking-wider mb-1">
                 DRIVING REPORT
               </p>
               <h1 className="text-2xl font-black text-gray-900">
@@ -174,7 +174,7 @@ export default function DrivingReportPage() {
 
       {/* ── Footer ── */}
       <footer className="px-6 py-4 text-center border-t border-gray-200">
-        <p className="text-xs font-semibold text-gray-400">
+        <p className="text-xs font-semibold text-gray-700">
           차량 VIN: KMH●●●●●●●●35820 · <span className="text-ivi-accent">Blockchain Verified</span>
         </p>
       </footer>

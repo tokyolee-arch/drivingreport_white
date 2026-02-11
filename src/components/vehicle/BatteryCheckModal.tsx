@@ -336,16 +336,16 @@ export default function BatteryCheckModal({ onClose }: BatteryCheckModalProps) {
 
                 <div className="flex items-baseline gap-3 mb-4">
                   <span className="text-6xl font-black text-ivi-accent">{results.health}</span>
-                  <span className="text-3xl font-bold text-gray-400">%</span>
+                  <span className="text-3xl font-bold text-gray-700">%</span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-white rounded-lg p-3 border border-gray-200">
-                    <p className="text-xs font-semibold text-gray-500 mb-1">사용 가능 용량</p>
+                    <p className="text-xs font-semibold text-gray-700 mb-1">사용 가능 용량</p>
                     <p className="text-lg font-black text-gray-900">{results.capacity} kWh</p>
                   </div>
                   <div className="bg-white rounded-lg p-3 border border-gray-200">
-                    <p className="text-xs font-semibold text-gray-500 mb-1">최대 용량</p>
+                    <p className="text-xs font-semibold text-gray-700 mb-1">최대 용량</p>
                     <p className="text-lg font-black text-gray-900">{results.maxCapacity} kWh</p>
                   </div>
                 </div>
@@ -410,7 +410,7 @@ export default function BatteryCheckModal({ onClose }: BatteryCheckModalProps) {
             className={`w-full py-3.5 rounded-xl text-sm font-bold transition-all ${
               stage === 'complete'
                 ? 'bg-gradient-to-r from-ivi-accent to-emerald-500 text-white hover:shadow-lg hover:scale-105'
-                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                : 'bg-gray-200 text-gray-700 cursor-not-allowed'
             }`}
           >
             {stage === 'complete' ? '확인' : '점검 진행 중...'}

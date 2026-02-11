@@ -167,14 +167,14 @@ export default function Receipt({ data, onClose }: ReceiptProps) {
                   <rect x="80" y="80" width="10" height="10" fill="#000" />
                 </svg>
               </div>
-              <p className="text-xs text-gray-500">블록체인 인증 완료</p>
+              <p className="text-xs text-gray-700">블록체인 인증 완료</p>
             </div>
           </div>
 
           {/* 푸터 */}
           <div className="text-center mt-6 pt-4 border-t border-gray-200">
-            <p className="text-xs text-gray-500">이용해 주셔서 감사합니다</p>
-            <p className="text-xs text-gray-500">Thank you for your visit</p>
+            <p className="text-xs text-gray-700">이용해 주셔서 감사합니다</p>
+            <p className="text-xs text-gray-700">Thank you for your visit</p>
           </div>
         </div>
       </div>

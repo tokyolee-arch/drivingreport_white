@@ -8,7 +8,7 @@ interface SpeedGraphProps {
 export default function SpeedGraph({ data, color }: SpeedGraphProps) {
   return (
     <div className="bg-ivi-bg rounded-lg p-3 border border-white/[0.04]">
-      <p className="text-[10px] text-gray-500 mb-2">⚡ 속도 변화 그래프</p>
+      <p className="text-[10px] text-gray-700 mb-2">⚡ 속도 변화 그래프</p>
 
       <div className="relative h-16">
         <svg
@@ -77,7 +77,7 @@ export default function SpeedGraph({ data, color }: SpeedGraphProps) {
 
       {/* 시작/끝 라벨 */}
       <div className="flex justify-between mt-1.5">
-        <span className="text-[10px] text-gray-500">{data.startLabel}</span>
+        <span className="text-[10px] text-gray-700">{data.startLabel}</span>
         <span className="text-[10px] font-semibold" style={{ color }}>
           {data.endLabel}
         </span>

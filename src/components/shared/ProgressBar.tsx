@@ -20,7 +20,7 @@ export default function ProgressBar({
       {/* 라벨 행 */}
       <div className="flex items-center justify-between">
         <span className="text-sm font-bold text-gray-900">{label}</span>
-        <span className="text-xs font-semibold text-gray-500">{detail}</span>
+        <span className="text-xs font-semibold text-gray-700">{detail}</span>
       </div>
 
       {/* 바 */}

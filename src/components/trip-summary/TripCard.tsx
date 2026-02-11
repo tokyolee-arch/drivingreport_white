@@ -46,7 +46,7 @@ export default function TripCard({
         /* ── 주행기록 없는 날 ── */
         <div className="py-6 flex flex-col items-center gap-2">
           <span className="text-2xl">🅿️</span>
-          <p className="text-sm text-gray-500">이 날은 주행 기록이 없습니다</p>
+          <p className="text-sm text-gray-700">이 날은 주행 기록이 없습니다</p>
           {trip.safetyScore > 0 && (
             <p className="text-[11px] text-gray-600">
               누적 안전점수 <span className="text-ivi-accent font-semibold">{trip.safetyScore}점</span>
@@ -104,7 +104,7 @@ function MetricCell({ icon, label, value, unit, sub }: MetricCellProps) {
       <span className="text-[13px] font-bold text-gray-100 leading-tight">
         {value}
         {unit && (
-          <span className="text-[10px] font-normal text-gray-500 ml-0.5">
+          <span className="text-[10px] font-normal text-gray-700 ml-0.5">
             {unit}
           </span>
         )}

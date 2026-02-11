@@ -33,7 +33,7 @@ export default function PillSelector({
               ${
                 isActive
                   ? 'bg-ivi-accent text-black font-semibold shadow-[0_2px_12px_rgba(0,212,170,0.25)]'
-                  : 'bg-white/[0.04] text-gray-500 border border-white/[0.06] hover:bg-white/[0.08] hover:text-gray-300'
+                  : 'bg-white/[0.04] text-gray-700 border border-white/[0.06] hover:bg-white/[0.08] hover:text-gray-300'
               }
             `}
           >

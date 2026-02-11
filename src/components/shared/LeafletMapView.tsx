@@ -134,7 +134,7 @@ export default function LeafletMapView({ lat, lng, label, address }: LeafletMapV
         <div className="space-y-0.5">
           <p className="text-sm font-bold text-gray-900">{label}</p>
           <p className="text-xs text-gray-600">{address}</p>
-          <p className="text-[10px] text-gray-500 font-mono">
+          <p className="text-[10px] text-gray-700 font-mono">
             {lat.toFixed(4)}, {lng.toFixed(4)}
           </p>
         </div>
@@ -172,7 +172,7 @@ export default function LeafletMapView({ lat, lng, label, address }: LeafletMapV
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="text-gray-500 group-hover:text-ivi-accent transition-colors"
+            className="text-gray-700 group-hover:text-ivi-accent transition-colors"
           >
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
             <polyline points="15 3 21 3 21 9" />
