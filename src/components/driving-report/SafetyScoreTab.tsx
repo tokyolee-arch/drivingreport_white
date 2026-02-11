@@ -195,7 +195,7 @@ export default function SafetyScoreTab() {
           <Badge text="안전 운전자 등급" color="#00d4aa" />
         </div>
 
-        <p className="mt-2 text-xs text-gray-700">
+        <p className="mt-2 text-xs text-gray-900">
           상위 <span className="text-gray-300 font-semibold">23%</span> ·
           지난주 대비{' '}
           <span className="text-ivi-accent font-semibold">+3점</span>
@@ -211,7 +211,7 @@ export default function SafetyScoreTab() {
           const isWorse = item.lowerIsBetter ? diff > 0 : diff < 0;
           const arrow = diff > 0 ? '▲' : diff < 0 ? '▼' : '−';
 
-          let changeColor = 'text-gray-700';
+          let changeColor = 'text-gray-900';
           if (isImproved) changeColor = 'text-emerald-400';
           if (isWorse) changeColor = 'text-red-400';
 
@@ -230,13 +230,13 @@ export default function SafetyScoreTab() {
 
                 {/* 텍스트 */}
                 <div className="flex flex-col min-w-0 flex-1">
-                  <span className="text-[11px] text-gray-700 leading-tight">
+                  <span className="text-[11px] text-gray-900 leading-tight">
                     {item.icon} {item.label}
                   </span>
 
                   <span className="text-lg font-bold text-gray-100 leading-tight">
                     {item.value}
-                    <span className="text-[10px] font-normal text-gray-700 ml-0.5">
+                    <span className="text-[10px] font-normal text-gray-900 ml-0.5">
                       {item.unit}
                     </span>
                   </span>
@@ -244,7 +244,7 @@ export default function SafetyScoreTab() {
                   <span className={`text-[10px] font-medium leading-tight ${changeColor}`}>
                     {arrow} {absDiff}
                     {item.unit}{' '}
-                    <span className="text-gray-600 font-normal">vs 지난주</span>
+                    <span className="text-gray-900 font-normal">vs 지난주</span>
                   </span>
                 </div>
 
@@ -282,7 +282,7 @@ export default function SafetyScoreTab() {
                         {tipData.tips.map((tip, i) => (
                           <li
                             key={i}
-                            className="flex gap-1.5 text-[10px] text-gray-700 leading-relaxed"
+                            className="flex gap-1.5 text-[10px] text-gray-900 leading-relaxed"
                           >
                             <span className="text-amber-500/70 mt-0.5 shrink-0">•</span>
                             <span>{tip}</span>
@@ -306,7 +306,7 @@ export default function SafetyScoreTab() {
         <div className="px-4 pt-4 pb-2 flex items-center gap-2">
           <span className="text-base">🛞</span>
           <h3 className="text-sm font-bold text-gray-100">ADAS 사용시간</h3>
-          <span className="text-[10px] text-gray-600 ml-auto">이번 주 누적</span>
+          <span className="text-[10px] text-gray-900 ml-auto">이번 주 누적</span>
         </div>
 
         {/* 3-컬럼 카드 */}
@@ -324,10 +324,10 @@ export default function SafetyScoreTab() {
             </div>
             <div className="text-center">
               <p className="text-[10px] text-sky-400 font-bold tracking-wide">LFA</p>
-              <p className="text-[9px] text-gray-700 leading-tight">차선유지</p>
+              <p className="text-[9px] text-gray-900 leading-tight">차선유지</p>
             </div>
             <p className="text-xl font-extrabold text-gray-100 leading-none">2.8
-              <span className="text-[10px] font-normal text-gray-700">h</span>
+              <span className="text-[10px] font-normal text-gray-900">h</span>
             </p>
             <p className="text-[9px] text-emerald-400 font-medium">▲ 0.5h vs 지난주</p>
           </div>
@@ -344,10 +344,10 @@ export default function SafetyScoreTab() {
             </div>
             <div className="text-center">
               <p className="text-[10px] text-violet-400 font-bold tracking-wide">HDA</p>
-              <p className="text-[9px] text-gray-700 leading-tight">고속도로 지원</p>
+              <p className="text-[9px] text-gray-900 leading-tight">고속도로 지원</p>
             </div>
             <p className="text-xl font-extrabold text-gray-100 leading-none">1.5
-              <span className="text-[10px] font-normal text-gray-700">h</span>
+              <span className="text-[10px] font-normal text-gray-900">h</span>
             </p>
             <p className="text-[9px] text-emerald-400 font-medium">▲ 0.3h vs 지난주</p>
           </div>
@@ -366,10 +366,10 @@ export default function SafetyScoreTab() {
             </div>
             <div className="text-center">
               <p className="text-[10px] text-ivi-accent font-bold tracking-wide">SCC</p>
-              <p className="text-[9px] text-gray-700 leading-tight">스마트 크루즈</p>
+              <p className="text-[9px] text-gray-900 leading-tight">스마트 크루즈</p>
             </div>
             <p className="text-xl font-extrabold text-gray-100 leading-none">3.2
-              <span className="text-[10px] font-normal text-gray-700">h</span>
+              <span className="text-[10px] font-normal text-gray-900">h</span>
             </p>
             <p className="text-[9px] text-red-400 font-medium">▼ 0.8h vs 지난주</p>
           </div>
@@ -377,10 +377,10 @@ export default function SafetyScoreTab() {
 
         {/* 총 사용시간 요약 바 */}
         <div className="mx-3 mb-4 rounded-lg bg-white/[0.03] px-3 py-2 flex items-center justify-between">
-          <span className="text-[11px] text-gray-700">총 ADAS 사용시간</span>
+          <span className="text-[11px] text-gray-900">총 ADAS 사용시간</span>
           <span className="text-sm font-bold text-gray-200">
-            7.5<span className="text-[10px] font-normal text-gray-700 ml-0.5">시간</span>
-            <span className="text-[10px] font-normal text-gray-600 ml-1.5">
+            7.5<span className="text-[10px] font-normal text-gray-900 ml-0.5">시간</span>
+            <span className="text-[10px] font-normal text-gray-900 ml-1.5">
               / 주행시간의 <span className="text-ivi-accent font-semibold">150%</span>
             </span>
           </span>
@@ -398,7 +398,7 @@ export default function SafetyScoreTab() {
           <span className="text-xl">🛡️</span>
           <div>
             <h3 className="text-sm font-bold text-gray-100">보험 연계 혜택</h3>
-            <p className="text-[11px] text-gray-700">
+            <p className="text-[11px] text-gray-900">
               안전점수 기반 UBI 보험 할인
             </p>
           </div>
@@ -420,14 +420,14 @@ export default function SafetyScoreTab() {
               >
                 -{ins.discount}%
               </span>
-              <span className="text-[11px] text-gray-700 font-medium text-center leading-tight">
+              <span className="text-[11px] text-gray-900 font-medium text-center leading-tight">
                 {ins.name}
               </span>
             </div>
           ))}
         </div>
 
-        <p className="mt-3 text-[10px] text-gray-600 text-center">
+        <p className="mt-3 text-[10px] text-gray-900 text-center">
           * 할인율은 안전점수와 주행 이력에 따라 변동될 수 있습니다
         </p>
       </div>

@@ -325,7 +325,7 @@ export default function WeeklyChart({
                   ) : (
                     <span
                       className={`text-[10px] font-medium ${
-                        isSelected ? 'text-gray-200' : 'text-gray-600'
+                        isSelected ? 'text-gray-200' : 'text-gray-900'
                       }`}
                     >
                       {DAY_LABELS[i]}
@@ -333,7 +333,7 @@ export default function WeeklyChart({
                   )}
                   <span
                     className={`text-[8px] ${
-                      isSelected ? 'text-gray-700' : 'text-gray-700'
+                      isSelected ? 'text-gray-900' : 'text-gray-900'
                     }`}
                   >
                     {dateLabels[i]}
@@ -402,7 +402,7 @@ export default function WeeklyChart({
                   ) : (
                     <span
                       className={`text-[10px] font-medium ${
-                        isSelected ? 'text-gray-200' : 'text-gray-600'
+                        isSelected ? 'text-gray-200' : 'text-gray-900'
                       }`}
                     >
                       {DAY_LABELS[i]}
@@ -410,7 +410,7 @@ export default function WeeklyChart({
                   )}
                   <span
                     className={`text-[8px] ${
-                      isSelected ? 'text-gray-700' : 'text-gray-700'
+                      isSelected ? 'text-gray-900' : 'text-gray-900'
                     }`}
                   >
                     {dateLabels[i]}
@@ -426,7 +426,7 @@ export default function WeeklyChart({
       <div className="mt-4 pt-3 border-t border-white/[0.04] grid grid-cols-3 gap-2">
         {summary.map((item, i) => (
           <div key={i} className="flex flex-col items-center gap-0.5">
-            <span className="text-[10px] text-gray-600">{item.label}</span>
+            <span className="text-[10px] text-gray-900">{item.label}</span>
             <span className="text-sm font-bold text-gray-200">{item.value}</span>
           </div>
         ))}

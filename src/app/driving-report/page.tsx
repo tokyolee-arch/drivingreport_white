@@ -82,7 +82,7 @@ export default function DrivingReportPage() {
           <div className="flex items-center justify-between mb-5">
             {/* 좌측 */}
             <div>
-              <p className="text-[11px] text-gray-700 font-bold uppercase tracking-wider mb-1">
+              <p className="text-[11px] text-gray-900 font-bold uppercase tracking-wider mb-1">
                 DRIVING REPORT
               </p>
               <h1 className="text-2xl font-black text-gray-900">
@@ -92,7 +92,7 @@ export default function DrivingReportPage() {
 
             {/* 우측 */}
             <div className="text-right">
-              <p className="text-sm font-bold text-gray-600">{getTodayString()}</p>
+              <p className="text-sm font-bold text-gray-900">{getTodayString()}</p>
               <p className="text-xs font-extrabold text-ivi-accent flex items-center justify-end gap-1.5 mt-1">
                 <span
                   className="inline-block w-2 h-2 rounded-full bg-ivi-accent"
@@ -129,7 +129,7 @@ export default function DrivingReportPage() {
                     ${
                       isActive
                         ? 'text-white shadow-lg scale-105'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'
+                        : 'text-gray-900 hover:text-gray-900 hover:bg-white/50'
                     }
                   `}
                   style={
@@ -174,7 +174,7 @@ export default function DrivingReportPage() {
 
       {/* ── Footer ── */}
       <footer className="px-6 py-4 text-center border-t border-gray-200">
-        <p className="text-xs font-semibold text-gray-700">
+        <p className="text-xs font-semibold text-gray-900">
           차량 VIN: KMH●●●●●●●●35820 · <span className="text-ivi-accent">Blockchain Verified</span>
         </p>
       </footer>

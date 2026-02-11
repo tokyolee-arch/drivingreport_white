@@ -116,14 +116,14 @@ export default function LeafletMapView({ lat, lng, label, address }: LeafletMapV
         {!ready && !error && (
           <div className="absolute inset-0 z-10 bg-white flex flex-col items-center justify-center gap-1.5">
             <div className="w-6 h-6 border-2 border-gray-300 border-t-ivi-accent rounded-full animate-spin" />
-            <span className="text-xs text-gray-600">지도 로딩 중…</span>
+            <span className="text-xs text-gray-900">지도 로딩 중…</span>
           </div>
         )}
 
         {/* 에러 */}
         {error && (
           <div className="absolute inset-0 z-10 bg-white flex flex-col items-center justify-center gap-1.5 px-4">
-            <span className="text-xs text-gray-600">지도를 불러올 수 없습니다</span>
+            <span className="text-xs text-gray-900">지도를 불러올 수 없습니다</span>
             <span className="text-[9px] text-red-500 text-center break-all">{error}</span>
           </div>
         )}
@@ -133,8 +133,8 @@ export default function LeafletMapView({ lat, lng, label, address }: LeafletMapV
       <div className="px-4 py-3 bg-gray-50 border-t border-gray-200 space-y-2">
         <div className="space-y-0.5">
           <p className="text-sm font-bold text-gray-900">{label}</p>
-          <p className="text-xs text-gray-600">{address}</p>
-          <p className="text-[10px] text-gray-700 font-mono">
+          <p className="text-xs text-gray-900">{address}</p>
+          <p className="text-[10px] text-gray-900 font-mono">
             {lat.toFixed(4)}, {lng.toFixed(4)}
           </p>
         </div>
@@ -160,7 +160,7 @@ export default function LeafletMapView({ lat, lng, label, address }: LeafletMapV
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
             <circle cx="12" cy="10" r="3" />
           </svg>
-          <span className="text-xs font-bold text-gray-700 group-hover:text-ivi-accent transition-colors">
+          <span className="text-xs font-bold text-gray-900 group-hover:text-ivi-accent transition-colors">
             네이버 지도에서 보기
           </span>
           <svg
@@ -172,7 +172,7 @@ export default function LeafletMapView({ lat, lng, label, address }: LeafletMapV
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="text-gray-700 group-hover:text-ivi-accent transition-colors"
+            className="text-gray-900 group-hover:text-ivi-accent transition-colors"
           >
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
             <polyline points="15 3 21 3 21 9" />

@@ -59,9 +59,9 @@ export default function EventTimeline({
 
       {/* 서브 */}
       <div className="flex items-center justify-between mb-4">
-        <p className="text-[11px] text-gray-700">{tripRoute}</p>
+        <p className="text-[11px] text-gray-900">{tripRoute}</p>
         {hasEvents && (
-          <p className="text-[10px] text-gray-600">항목을 눌러 상세 보기</p>
+          <p className="text-[10px] text-gray-900">항목을 눌러 상세 보기</p>
         )}
       </div>
 
@@ -80,7 +80,7 @@ export default function EventTimeline({
       ) : (
         <div className="py-10 flex flex-col items-center gap-2">
           <span className="text-2xl">🚫</span>
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-gray-900">
             이 날의 주행 기록이 없습니다.
           </p>
         </div>

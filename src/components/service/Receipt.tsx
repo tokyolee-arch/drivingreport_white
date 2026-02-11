@@ -62,32 +62,32 @@ export default function Receipt({ data, onClose }: ReceiptProps) {
           {/* 헤더 */}
           <div className="text-center border-b-2 border-black pb-4 mb-4">
             <h1 className="text-xl font-bold mb-1">정비 영수증</h1>
-            <p className="text-xs text-gray-600">SERVICE RECEIPT</p>
+            <p className="text-xs text-gray-900">SERVICE RECEIPT</p>
           </div>
 
           {/* 서비스센터 정보 */}
           <div className="mb-4 text-sm">
             <p className="font-bold text-base mb-2">{data.center}</p>
-            <p className="text-xs text-gray-700">{data.centerAddress}</p>
-            <p className="text-xs text-gray-700">TEL: {data.centerPhone}</p>
+            <p className="text-xs text-gray-900">{data.centerAddress}</p>
+            <p className="text-xs text-gray-900">TEL: {data.centerPhone}</p>
           </div>
 
           {/* 영수증 번호 및 일시 */}
           <div className="border-y border-gray-300 py-3 mb-4">
             <div className="flex justify-between text-xs mb-1">
-              <span className="text-gray-600">영수증 번호</span>
+              <span className="text-gray-900">영수증 번호</span>
               <span className="font-bold">{data.receiptNumber}</span>
             </div>
             <div className="flex justify-between text-xs mb-1">
-              <span className="text-gray-600">날짜</span>
+              <span className="text-gray-900">날짜</span>
               <span>{formatDate(data.date)} {data.time}</span>
             </div>
             <div className="flex justify-between text-xs mb-1">
-              <span className="text-gray-600">차량</span>
+              <span className="text-gray-900">차량</span>
               <span>{data.vehicle}</span>
             </div>
             <div className="flex justify-between text-xs">
-              <span className="text-gray-600">주행거리</span>
+              <span className="text-gray-900">주행거리</span>
               <span>{data.mileage.toLocaleString()} km</span>
             </div>
           </div>
@@ -119,11 +119,11 @@ export default function Receipt({ data, onClose }: ReceiptProps) {
           {/* 합계 */}
           <div className="border-t-2 border-black pt-3 mb-4">
             <div className="flex justify-between text-sm mb-2">
-              <span className="text-gray-600">소계</span>
+              <span className="text-gray-900">소계</span>
               <span>₩{data.subtotal.toLocaleString()}</span>
             </div>
             <div className="flex justify-between text-sm mb-3">
-              <span className="text-gray-600">부가세 (10%)</span>
+              <span className="text-gray-900">부가세 (10%)</span>
               <span>₩{data.vat.toLocaleString()}</span>
             </div>
             <div className="flex justify-between text-lg font-bold border-t border-gray-300 pt-3">
@@ -135,17 +135,17 @@ export default function Receipt({ data, onClose }: ReceiptProps) {
           {/* 결제 정보 */}
           <div className="border-t border-gray-300 pt-3 mb-4">
             <div className="flex justify-between text-xs mb-1">
-              <span className="text-gray-600">결제 방법</span>
+              <span className="text-gray-900">결제 방법</span>
               <span className="font-semibold">{data.paymentMethod}</span>
             </div>
             <div className="flex justify-between text-xs">
-              <span className="text-gray-600">담당 기술자</span>
+              <span className="text-gray-900">담당 기술자</span>
               <span>{data.technician}</span>
             </div>
           </div>
 
           {/* 안내 사항 */}
-          <div className="bg-gray-50 rounded p-3 text-xs text-gray-600 mb-4">
+          <div className="bg-gray-50 rounded p-3 text-xs text-gray-900 mb-4">
             <p className="mb-1">• 본 영수증은 현금영수증 및 세금계산서 발행 전 임시 영수증입니다.</p>
             <p className="mb-1">• 정비 후 3개월 또는 5,000km 이내 무상 A/S가 적용됩니다.</p>
             <p>• 문의사항은 고객센터 1588-5000으로 연락주시기 바랍니다.</p>
@@ -167,14 +167,14 @@ export default function Receipt({ data, onClose }: ReceiptProps) {
                   <rect x="80" y="80" width="10" height="10" fill="#000" />
                 </svg>
               </div>
-              <p className="text-xs text-gray-700">블록체인 인증 완료</p>
+              <p className="text-xs text-gray-900">블록체인 인증 완료</p>
             </div>
           </div>
 
           {/* 푸터 */}
           <div className="text-center mt-6 pt-4 border-t border-gray-200">
-            <p className="text-xs text-gray-700">이용해 주셔서 감사합니다</p>
-            <p className="text-xs text-gray-700">Thank you for your visit</p>
+            <p className="text-xs text-gray-900">이용해 주셔서 감사합니다</p>
+            <p className="text-xs text-gray-900">Thank you for your visit</p>
           </div>
         </div>
       </div>

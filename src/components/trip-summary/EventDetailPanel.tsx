@@ -55,7 +55,7 @@ export default function EventDetailPanel({
         className="w-full flex items-center gap-3 px-3 py-2.5 text-left group"
       >
         {/* 시간 */}
-        <span className="text-xs text-gray-700 font-mono w-10 shrink-0">
+        <span className="text-xs text-gray-900 font-mono w-10 shrink-0">
           {event.time}
         </span>
 
@@ -71,10 +71,10 @@ export default function EventDetailPanel({
 
         {/* 이벤트명 + 위치 */}
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-semibold text-gray-200 truncate">
+          <p className="text-xs font-semibold text-gray-900 truncate">
             {event.title}
           </p>
-          <p className="text-[10px] text-gray-600 truncate">{event.location}</p>
+          <p className="text-[10px] text-gray-900 truncate">{event.location}</p>
         </div>
 
         {/* 달성(good) 리워드 뱃지 */}
@@ -98,7 +98,7 @@ export default function EventDetailPanel({
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className={`text-gray-600 shrink-0 transition-transform duration-300 ${
+          className={`text-gray-900 shrink-0 transition-transform duration-300 ${
             isExpanded ? 'rotate-180' : ''
           }`}
         >

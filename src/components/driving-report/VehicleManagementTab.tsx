@@ -172,16 +172,16 @@ export default function VehicleManagementTab() {
             <div className="flex items-center justify-between">
               <div className="flex items-baseline gap-3">
                 <span className="text-5xl font-black text-ivi-accent">94</span>
-                <span className="text-2xl font-bold text-gray-700">%</span>
+                <span className="text-2xl font-bold text-gray-900">%</span>
               </div>
               <div className="text-right">
-                <p className="text-sm font-bold text-gray-600">양호</p>
-                <p className="text-xs text-gray-700 mt-1">72.8 / 77.4 kWh</p>
+                <p className="text-sm font-bold text-gray-900">양호</p>
+                <p className="text-xs text-gray-900 mt-1">72.8 / 77.4 kWh</p>
               </div>
             </div>
             <button
               onClick={() => setShowBatteryCheck(true)}
-              className="w-full mt-4 py-3 border border-gray-300 rounded-lg text-sm font-bold text-gray-700 hover:bg-gray-50 transition-colors"
+              className="w-full mt-4 py-3 border border-gray-300 rounded-lg text-sm font-bold text-gray-900 hover:bg-gray-50 transition-colors"
             >
               배터리 점검하기
             </button>
@@ -231,7 +231,7 @@ export default function VehicleManagementTab() {
                       <p className="text-sm font-bold text-gray-900">
                         {dt.month}.{dt.day}
                       </p>
-                      <p className="text-xs text-gray-700 mt-0.5">
+                      <p className="text-xs text-gray-900 mt-0.5">
                         {dt.year}
                       </p>
                     </div>
@@ -241,7 +241,7 @@ export default function VehicleManagementTab() {
                       <p className="text-sm font-bold text-gray-900 truncate">
                         {summarizeItems(rec.items)}
                       </p>
-                      <p className="text-xs text-gray-700 truncate mt-0.5">
+                      <p className="text-xs text-gray-900 truncate mt-0.5">
                         {rec.center}
                       </p>
                     </div>
@@ -255,7 +255,7 @@ export default function VehicleManagementTab() {
                         width="16" height="16" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" strokeWidth="2"
                         strokeLinecap="round" strokeLinejoin="round"
-                        className={`text-gray-700 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                        className={`text-gray-900 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
                       >
                         <polyline points="6 9 12 15 18 9" />
                       </svg>
@@ -270,7 +270,7 @@ export default function VehicleManagementTab() {
                           {rec.items.map((item, j) => (
                             <span
                               key={j}
-                              className="text-xs font-semibold bg-gray-100 text-gray-600 px-3 py-1.5 rounded-full"
+                              className="text-xs font-semibold bg-gray-100 text-gray-900 px-3 py-1.5 rounded-full"
                             >
                               {item}
                             </span>
@@ -303,7 +303,7 @@ export default function VehicleManagementTab() {
               <span className="text-2xl">⚠️</span>
               <div className="flex-1">
                 <p className="text-sm font-black text-gray-900 mb-1">정비 알림</p>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-900">
                   브레이크 패드(전) 점검 권장 · 에어컨 필터 교체 필요
                 </p>
               </div>
@@ -315,7 +315,7 @@ export default function VehicleManagementTab() {
         </div>
 
         {/* ── 5. 사용자 매뉴얼 ── */}
-        <button className="w-full py-4 border border-gray-300 rounded-lg text-sm font-bold text-gray-700 hover:bg-gray-50 transition-colors">
+        <button className="w-full py-4 border border-gray-300 rounded-lg text-sm font-bold text-gray-900 hover:bg-gray-50 transition-colors">
           사용자 매뉴얼 보기
         </button>
       </div>

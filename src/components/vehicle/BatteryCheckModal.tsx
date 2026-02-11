@@ -336,16 +336,16 @@ export default function BatteryCheckModal({ onClose }: BatteryCheckModalProps) {
 
                 <div className="flex items-baseline gap-3 mb-4">
                   <span className="text-6xl font-black text-ivi-accent">{results.health}</span>
-                  <span className="text-3xl font-bold text-gray-700">%</span>
+                  <span className="text-3xl font-bold text-gray-900">%</span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-white rounded-lg p-3 border border-gray-200">
-                    <p className="text-xs font-semibold text-gray-700 mb-1">사용 가능 용량</p>
+                    <p className="text-xs font-semibold text-gray-900 mb-1">사용 가능 용량</p>
                     <p className="text-lg font-black text-gray-900">{results.capacity} kWh</p>
                   </div>
                   <div className="bg-white rounded-lg p-3 border border-gray-200">
-                    <p className="text-xs font-semibold text-gray-700 mb-1">최대 용량</p>
+                    <p className="text-xs font-semibold text-gray-900 mb-1">최대 용량</p>
                     <p className="text-lg font-black text-gray-900">{results.maxCapacity} kWh</p>
                   </div>
                 </div>
@@ -357,19 +357,19 @@ export default function BatteryCheckModal({ onClose }: BatteryCheckModalProps) {
 
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-gray-600">전압</span>
+                    <span className="text-sm font-semibold text-gray-900">전압</span>
                     <span className="text-sm font-bold text-gray-900">{results.voltage} V</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-gray-600">온도</span>
+                    <span className="text-sm font-semibold text-gray-900">온도</span>
                     <span className="text-sm font-bold text-gray-900">{results.temperature} °C</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-gray-600">충전 사이클</span>
+                    <span className="text-sm font-semibold text-gray-900">충전 사이클</span>
                     <span className="text-sm font-bold text-gray-900">{results.cycles} 회</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-gray-600">셀 밸런스</span>
+                    <span className="text-sm font-semibold text-gray-900">셀 밸런스</span>
                     <span className="text-sm font-bold text-ivi-accent">{results.cellBalance}%</span>
                   </div>
                 </div>
@@ -381,7 +381,7 @@ export default function BatteryCheckModal({ onClose }: BatteryCheckModalProps) {
                   <span className="text-2xl">💡</span>
                   <div className="flex-1">
                     <h4 className="text-sm font-black text-gray-900 mb-2">권장사항</h4>
-                    <ul className="space-y-1.5 text-sm text-gray-700">
+                    <ul className="space-y-1.5 text-sm text-gray-900">
                       <li className="flex items-start gap-2">
                         <span className="text-ivi-accent mt-0.5">•</span>
                         <span>배터리 상태가 양호합니다. 정기 점검을 권장합니다.</span>
@@ -410,7 +410,7 @@ export default function BatteryCheckModal({ onClose }: BatteryCheckModalProps) {
             className={`w-full py-3.5 rounded-xl text-sm font-bold transition-all ${
               stage === 'complete'
                 ? 'bg-gradient-to-r from-ivi-accent to-emerald-500 text-white hover:shadow-lg hover:scale-105'
-                : 'bg-gray-200 text-gray-700 cursor-not-allowed'
+                : 'bg-gray-200 text-gray-900 cursor-not-allowed'
             }`}
           >
             {stage === 'complete' ? '확인' : '점검 진행 중...'}

@@ -68,7 +68,7 @@ export default function ScoreRing({ score, size, color }: ScoreRingProps) {
           {animatedScore}
         </span>
         <span
-          className="text-gray-700 font-medium"
+          className="text-gray-900 font-medium"
           style={{ fontSize: size * 0.1 }}
         >
           /100
