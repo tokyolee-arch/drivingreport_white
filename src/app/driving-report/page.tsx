@@ -75,43 +75,41 @@ export default function DrivingReportPage() {
   }, [activeTab]);
 
   return (
-    <div className="w-full min-h-screen bg-ivi-bg flex flex-col">
+    <div className="w-full min-h-screen bg-white flex flex-col">
       {/* ── Header (sticky) ── */}
-      <header className="sticky top-0 z-30 bg-ivi-bg/80 backdrop-blur-md border-b border-white/[0.04]">
-        <div className="px-5 pt-4 pb-3">
-          <div className="flex items-center justify-between">
+      <header className="sticky top-0 z-30 bg-white border-b border-gray-200">
+        <div className="px-6 py-5">
+          <div className="flex items-center justify-between mb-5">
             {/* 좌측 */}
             <div>
-              <p className="text-[9px] text-gray-600 tracking-[0.2em] font-medium">
+              <p className="text-[11px] text-gray-500 font-bold uppercase tracking-wider mb-1">
                 DRIVING REPORT
               </p>
-              <h1 className="text-base font-bold text-gray-100 -mt-0.5">
+              <h1 className="text-2xl font-black text-gray-900">
                 주행 리포트
               </h1>
             </div>
 
             {/* 우측 */}
             <div className="text-right">
-              <p className="text-[10px] text-gray-500">{getTodayString()}</p>
-              <p className="text-[10px] font-semibold text-ivi-accent flex items-center justify-end gap-1 mt-0.5">
+              <p className="text-sm font-bold text-gray-600">{getTodayString()}</p>
+              <p className="text-xs font-extrabold text-ivi-accent flex items-center justify-end gap-1.5 mt-1">
                 <span
-                  className="inline-block w-1.5 h-1.5 rounded-full bg-ivi-accent animate-pulse"
+                  className="inline-block w-2 h-2 rounded-full bg-ivi-accent"
                   aria-hidden="true"
                 />
                 LIVE
               </p>
             </div>
           </div>
-        </div>
 
-        {/* ── Tab Bar (ARIA tablist) ── */}
-        <div className="px-4 pb-3">
+          {/* ── Tab Bar (ARIA tablist) ── */}
           <div
             ref={tabListRef}
             role="tablist"
             aria-label="주행 리포트 탭"
             onKeyDown={handleTabKeyDown}
-            className="bg-ivi-surfaceLight rounded-xl p-1 flex"
+            className="flex gap-2 p-1.5 bg-gray-100 rounded-xl"
           >
             {TABS.map((tab, i) => {
               const isActive = activeTab === i;
@@ -126,37 +124,33 @@ export default function DrivingReportPage() {
                   onClick={() => setActiveTab(i)}
                   aria-label={`${tab.label} 탭`}
                   className={`
-                    flex-1 py-2 rounded-lg text-[11px] font-semibold
-                    transition-all duration-200 relative
+                    flex-1 py-3.5 px-4 text-sm font-bold rounded-lg
+                    transition-all duration-300 relative overflow-hidden
                     ${
                       isActive
-                        ? 'text-ivi-accent'
-                        : 'text-gray-500 hover:text-gray-400'
+                        ? 'text-white shadow-lg scale-105'
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'
                     }
                   `}
                   style={
                     isActive
                       ? {
-                          background:
-                            'linear-gradient(180deg, rgba(0,212,170,0.08) 0%, rgba(0,212,170,0.02) 100%)',
+                          background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
                         }
-                      : undefined
+                      : {}
                   }
                 >
-                  <span className="flex flex-col items-center gap-0.5">
-                    <span className="text-sm" aria-hidden="true">
+                  <span className="flex flex-col items-center gap-1.5 relative z-10">
+                    <span className="text-xl" aria-hidden="true">
                       {tab.icon}
                     </span>
                     <span>{tab.label}</span>
                   </span>
 
-                  {/* 하단 accent 보더 */}
+                  {/* 활성 탭 글로우 효과 */}
                   {isActive && (
                     <span
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-[2px] rounded-full bg-ivi-accent"
-                      style={{
-                        boxShadow: '0 0 6px rgba(0,212,170,0.4)',
-                      }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"
                       aria-hidden="true"
                     />
                   )}
@@ -169,7 +163,7 @@ export default function DrivingReportPage() {
 
       {/* ── Content (fade-in on tab switch) ── */}
       <main
-        className="flex-1 min-h-0 overflow-y-auto px-4 py-3 animate-fade-in"
+        className="flex-1 min-h-0 overflow-y-auto px-6 py-6 animate-fade-in"
         key={activeTab}
         role="tabpanel"
         id={`tabpanel-${activeTab}`}
@@ -179,9 +173,9 @@ export default function DrivingReportPage() {
       </main>
 
       {/* ── Footer ── */}
-      <footer className="px-5 py-4 text-center">
-        <p className="text-[9px] text-gray-700">
-          차량 VIN: KMH●●●●●●●●35820 · Blockchain Verified
+      <footer className="px-6 py-4 text-center border-t border-gray-200">
+        <p className="text-xs font-semibold text-gray-400">
+          차량 VIN: KMH●●●●●●●●35820 · <span className="text-ivi-accent">Blockchain Verified</span>
         </p>
       </footer>
     </div>
