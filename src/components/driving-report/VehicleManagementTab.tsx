@@ -279,7 +279,9 @@ export default function VehicleManagementTab() {
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            rec.receiptData && setSelectedReceipt(rec.receiptData);
+                            if (rec.receiptData) {
+                              setSelectedReceipt(rec.receiptData);
+                            }
                           }}
                           className="w-full py-3 border border-ivi-accent rounded-lg text-sm font-bold text-ivi-accent hover:bg-ivi-accentLight transition-colors"
                         >

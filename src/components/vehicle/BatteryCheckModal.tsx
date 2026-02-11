@@ -9,7 +9,7 @@ interface BatteryCheckModalProps {
 export default function BatteryCheckModal({ onClose }: BatteryCheckModalProps) {
   const [progress, setProgress] = useState(0);
   const [stage, setStage] = useState<'scanning' | 'analyzing' | 'complete'>('scanning');
-  const [results, setResults] = useState({
+  const results = {
     health: 94,
     capacity: 72.8,
     maxCapacity: 77.4,
@@ -17,7 +17,7 @@ export default function BatteryCheckModal({ onClose }: BatteryCheckModalProps) {
     temperature: 28.5,
     cycles: 142,
     cellBalance: 98.2,
-  });
+  };
 
   useEffect(() => {
     // 점검 진행 시뮬레이션
