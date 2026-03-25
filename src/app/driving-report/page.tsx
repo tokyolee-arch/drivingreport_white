@@ -3,12 +3,14 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import TripSummaryTab from '@/components/driving-report/TripSummaryTab';
 import SafetyScoreTab from '@/components/driving-report/SafetyScoreTab';
+import CostManagementTab from '@/components/driving-report/CostManagementTab';
 import VehicleManagementTab from '@/components/driving-report/VehicleManagementTab';
 import VehicleValueTab from '@/components/driving-report/VehicleValueTab';
 
 // ── Tab 정의 ──
 
 const TABS = [
+  { icon: '💰', label: '홈' },
   { icon: '🚗', label: '주행요약' },
   { icon: '🛡️', label: '안전점수' },
   { icon: '🔧', label: 'Service' },
@@ -32,12 +34,14 @@ function getTodayString(): string {
 function TabContent({ index }: { index: number }) {
   switch (index) {
     case 0:
-      return <TripSummaryTab />;
+      return <CostManagementTab />;
     case 1:
-      return <SafetyScoreTab />;
+      return <TripSummaryTab />;
     case 2:
-      return <VehicleManagementTab />;
+      return <SafetyScoreTab />;
     case 3:
+      return <VehicleManagementTab />;
+    case 4:
       return <VehicleValueTab />;
     default:
       return null;
@@ -109,7 +113,7 @@ export default function DrivingReportPage() {
             role="tablist"
             aria-label="주행 리포트 탭"
             onKeyDown={handleTabKeyDown}
-            className="flex gap-2 p-1.5 bg-gray-100 rounded-xl"
+            className="flex gap-1 p-1.5 bg-gray-100 rounded-xl"
           >
             {TABS.map((tab, i) => {
               const isActive = activeTab === i;
@@ -124,7 +128,7 @@ export default function DrivingReportPage() {
                   onClick={() => setActiveTab(i)}
                   aria-label={`${tab.label} 탭`}
                   className={`
-                    flex-1 py-3.5 px-4 text-sm font-bold rounded-lg
+                    flex-1 py-2.5 px-1 text-[11px] font-bold rounded-lg whitespace-nowrap
                     transition-all duration-300 relative overflow-hidden
                     ${
                       isActive
@@ -140,11 +144,11 @@ export default function DrivingReportPage() {
                       : {}
                   }
                 >
-                  <span className="flex flex-col items-center gap-1.5 relative z-10">
-                    <span className="text-xl" aria-hidden="true">
+                  <span className="flex flex-col items-center gap-0.5 relative z-10">
+                    <span className="text-base" aria-hidden="true">
                       {tab.icon}
                     </span>
-                    <span>{tab.label}</span>
+                    <span className="leading-tight">{tab.label}</span>
                   </span>
 
                   {/* 활성 탭 글로우 효과 */}

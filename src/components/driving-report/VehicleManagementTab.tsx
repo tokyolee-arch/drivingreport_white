@@ -3,7 +3,9 @@
 import { useState } from 'react';
 import ProgressBar from '@/components/shared/ProgressBar';
 import Receipt from '@/components/service/Receipt';
+import ReceiptImageModal from '@/components/service/ReceiptImageModal';
 import BatteryCheckModal from '@/components/vehicle/BatteryCheckModal';
+import { consumableRisks } from '@/data/mock-driving-data';
 
 // ── 영수증 데이터 타입 생략 (이전과 동일) ──
 interface ReceiptItem {
@@ -37,15 +39,16 @@ interface ServiceRecord {
   totalCost: number;
   icon: string;
   receiptData?: ReceiptData;
+  receiptImageUrl?: string;
 }
 
-// ── 소모품 데이터 ──
+// ── 소모품 데이터 (5,000km 스케일) ──
+const CONSUMABLE_SCALE_KM = 5000;
 const CONSUMABLES = [
-  { label: '브레이크패드(전)', percent: 42, detail: '교체 4,200km 남음', color: '#f59e0b' },
-  { label: '브레이크패드(후)', percent: 68, detail: '교체 11,500km 남음', color: '#10b981' },
-  { label: '타이어마모도', percent: 55, detail: '교체 16,500km 남음', color: '#10b981' },
-  { label: '에어컨필터', percent: 25, detail: '즉시 교체 권장', color: '#ef4444' },
-  { label: '와이퍼블레이드', percent: 60, detail: '교체 6,000km 남음', color: '#10b981' },
+  { label: '브레이크패드(전)', remainKm: 4200, detail: '4,200km 남음', color: '#f59e0b' },
+  { label: '브레이크패드(후)', remainKm: 3500, detail: '3,500km 남음', color: '#10b981' },
+  { label: '에어컨필터', remainKm: 300, detail: '즉시 교체 권장', color: '#ef4444' },
+  { label: '와이퍼블레이드', remainKm: 1800, detail: '1,800km 남음', color: '#f59e0b' },
 ];
 
 // ── 정비 이력 데이터 ──
@@ -76,6 +79,7 @@ const SERVICE_RECORDS: ServiceRecord[] = [
       technician: '김정비',
       paymentMethod: '신용카드 (현대카드 ****-1234)',
     },
+    receiptImageUrl: '/receipts/receipt-gangnam-2026-01.png',
   },
   {
     center: '현대 분당 서비스센터',
@@ -102,6 +106,7 @@ const SERVICE_RECORDS: ServiceRecord[] = [
       technician: '이기술',
       paymentMethod: '체크카드 (신한카드 ****-5678)',
     },
+    receiptImageUrl: '/receipts/receipt-bundang-2025-11.png',
   },
   {
     center: '현대 수원 서비스센터',
@@ -130,6 +135,7 @@ const SERVICE_RECORDS: ServiceRecord[] = [
       technician: '박엔진',
       paymentMethod: '신용카드 (삼성카드 ****-9012)',
     },
+    receiptImageUrl: '/receipts/receipt-suwon-2025-09.png',
   },
 ];
 
@@ -156,10 +162,17 @@ function summarizeItems(items: string[]): string {
 }
 
 // ── 컴포넌트 ──
+function formatRiskWon(n: number): string {
+  if (n >= 10000) return `${(n / 10000).toFixed(0)}만원`;
+  return `${n.toLocaleString()}원`;
+}
+
 export default function VehicleManagementTab() {
   const [expandedRecord, setExpandedRecord] = useState<number | null>(null);
   const [selectedReceipt, setSelectedReceipt] = useState<ReceiptData | null>(null);
+  const [selectedReceiptImage, setSelectedReceiptImage] = useState<{ url: string; title: string } | null>(null);
   const [showBatteryCheck, setShowBatteryCheck] = useState(false);
+  const [showRiskDetail, setShowRiskDetail] = useState<string | null>(null);
 
   return (
     <>
@@ -188,28 +201,193 @@ export default function VehicleManagementTab() {
           </div>
         </div>
 
-        {/* ── 2. 소모품 상태 ── */}
+        {/* ── 2. 보험사 긴급호출 ── */}
         <div>
-          <h3 className="text-lg font-black text-gray-900 mb-4">소모품 상태</h3>
+          <h3 className="text-lg font-black text-gray-900 mb-4">보험사 긴급호출</h3>
+          <button className="w-full border border-red-200 rounded-lg p-5 bg-red-50/40 hover:bg-red-50 transition-colors text-left">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center shrink-0">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-base font-bold text-gray-900 mb-1">긴급 출동 서비스</p>
+                <p className="text-sm text-gray-600">사고·고장 시 보험사 긴급 출동을 요청합니다</p>
+              </div>
+              <div className="shrink-0 w-10 h-10 rounded-full bg-red-500 flex items-center justify-center">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        {/* ── 3. 소모품상태(교체 잔여시점) ── */}
+        <div>
+          <h3 className="text-lg font-black text-gray-900 mb-4">소모품상태(교체 잔여시점)</h3>
           <div className="border border-gray-200 rounded-lg p-6">
             <div className="space-y-5">
               {CONSUMABLES.map((c) => (
                 <ProgressBar
                   key={c.label}
-                  value={c.percent}
-                  max={100}
+                  value={Math.min(c.remainKm, CONSUMABLE_SCALE_KM)}
+                  max={CONSUMABLE_SCALE_KM}
                   color={c.color}
                   label={c.label}
                   detail={c.detail}
                 />
               ))}
             </div>
+            <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+              <span className="text-[10px] text-gray-400 font-semibold">0km</span>
+              <span className="text-[10px] text-gray-400 font-semibold">5,000km</span>
+            </div>
+          </div>
+        </div>
+
+        {/* ── 4. 리스크 금액화 (FMS 유니크B 적용) ── */}
+        <div>
+          <h3 className="text-lg font-black text-gray-900 mb-2">⚠️ 리스크 금액화</h3>
+          <p className="text-xs text-gray-500 mb-4">
+            정비를 미루면 발생할 수 있는 피해를 금액으로 환산합니다
+          </p>
+
+          <div className="space-y-3">
+            {consumableRisks.map((risk) => {
+              const isExpanded = showRiskDetail === risk.consumableName;
+              return (
+                <div
+                  key={risk.consumableName}
+                  className="border border-red-200 rounded-xl overflow-hidden bg-red-50/30"
+                >
+                  {/* 리스크 요약 */}
+                  <button
+                    onClick={() =>
+                      setShowRiskDetail(isExpanded ? null : risk.consumableName)
+                    }
+                    className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-red-50/50 transition-colors"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold text-gray-900">
+                        {risk.consumableName}
+                      </p>
+                      <p className="text-[11px] text-red-600 mt-0.5">
+                        {risk.currentStatus}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0 ml-3">
+                      <div className="text-right">
+                        <p className="text-sm font-extrabold text-red-600">
+                          {formatRiskWon(risk.totalRisk)}
+                        </p>
+                        <p className="text-[9px] text-red-500">리스크</p>
+                      </div>
+                      <svg
+                        width="14" height="14" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" strokeWidth="2"
+                        strokeLinecap="round" strokeLinejoin="round"
+                        className={`text-gray-400 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                      >
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
+                  </button>
+
+                  {/* 상세 시뮬레이션 */}
+                  <div className="expand-panel" data-open={isExpanded}>
+                    <div className="expand-inner">
+                      <div className="px-4 pb-4 border-t border-red-100">
+                        <div className="bg-red-50 rounded-lg p-3 mt-3">
+                          <p className="text-[11px] font-bold text-red-700 mb-2">
+                            ⚠️ 무시 시 리스크 시뮬레이션
+                          </p>
+                          <div className="grid grid-cols-2 gap-3">
+                            <div>
+                              <p className="text-[10px] text-gray-500">고장 확률</p>
+                              <p className="text-sm font-bold text-red-600">{risk.damageProb}%</p>
+                            </div>
+                            <div>
+                              <p className="text-[10px] text-gray-500">최대 수리비</p>
+                              <p className="text-sm font-bold text-red-600">
+                                {formatRiskWon(risk.replaceCost)}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="mt-3 pt-3 border-t border-red-200">
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="text-[10px] text-gray-600">지금 교체 비용</p>
+                                <p className="text-sm font-bold text-emerald-600">
+                                  {formatRiskWon(risk.repairCost)}
+                                </p>
+                              </div>
+                              <div className="text-center px-2">
+                                <p className="text-[10px] text-gray-400">vs</p>
+                              </div>
+                              <div className="text-right">
+                                <p className="text-[10px] text-gray-600">무시 시 리스크</p>
+                                <p className="text-sm font-bold text-red-600">
+                                  {formatRiskWon(risk.totalRisk)}
+                                </p>
+                              </div>
+                            </div>
+                            <p className="text-[12px] font-bold text-red-700 text-center mt-2">
+                              → {risk.riskMultiplier}배 차이
+                            </p>
+                          </div>
+                        </div>
+
+                        <button className="w-full mt-3 py-2.5 bg-red-500 text-white rounded-lg text-[13px] font-bold hover:bg-red-600 transition-colors">
+                          지금 정비 예약하기
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* 총 리스크 합산 */}
+          <div className="mt-3 bg-red-50 border border-red-200 rounded-xl p-4">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-gray-700">총 방치 리스크</span>
+              <span className="text-lg font-extrabold text-red-600">
+                {formatRiskWon(consumableRisks.reduce((sum, r) => sum + r.totalRisk, 0))}
+              </span>
+            </div>
+            <p className="text-[10px] text-gray-500 mt-1">
+              지금 정비 시 총 비용: {formatRiskWon(consumableRisks.reduce((sum, r) => sum + r.repairCost, 0))}
+              {' '}→{' '}
+              <span className="text-emerald-600 font-semibold">
+                {consumableRisks.reduce((sum, r) => sum + r.totalRisk, 0) > 0
+                  ? Math.round(
+                      consumableRisks.reduce((sum, r) => sum + r.totalRisk, 0) /
+                        consumableRisks.reduce((sum, r) => sum + r.repairCost, 0)
+                    )
+                  : 0}
+                배 절감
+              </span>
+            </p>
           </div>
         </div>
 
         {/* ── 3. 방문 정비 이력 ── */}
         <div>
-          <h3 className="text-lg font-black text-gray-900 mb-4">방문 정비 이력</h3>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-black text-gray-900">방문 정비 이력</h3>
+            <button className="flex items-center gap-1.5 px-4 py-2 bg-ivi-accent text-white rounded-lg text-sm font-bold hover:bg-ivi-accent/90 transition-colors">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="3" width="20" height="18" rx="2" ry="2" />
+                <circle cx="12" cy="13" r="4" />
+                <path d="M12 3v2" />
+              </svg>
+              영수증 사진찍기
+            </button>
+          </div>
           <div className="border border-gray-200 rounded-lg overflow-hidden">
             {RECENT_RECORDS.map((rec, i) => {
               const isLast = i === RECENT_RECORDS.length - 1;
@@ -276,17 +454,44 @@ export default function VehicleManagementTab() {
                             </span>
                           ))}
                         </div>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (rec.receiptData) {
-                              setSelectedReceipt(rec.receiptData);
-                            }
-                          }}
-                          className="w-full py-3 border border-ivi-accent rounded-lg text-sm font-bold text-ivi-accent hover:bg-ivi-accentLight transition-colors"
-                        >
-                          영수증 · 계산서 보기
-                        </button>
+                        <div className="flex gap-2">
+                          {rec.receiptImageUrl && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedReceiptImage({
+                                  url: rec.receiptImageUrl!,
+                                  title: `${rec.center} — ${rec.date}`,
+                                });
+                              }}
+                              className="flex-1 py-3 border border-ivi-accent rounded-lg text-sm font-bold text-ivi-accent hover:bg-ivi-accentLight transition-colors flex items-center justify-center gap-2"
+                            >
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="2" y="3" width="20" height="18" rx="2" ry="2" />
+                                <circle cx="12" cy="13" r="4" />
+                                <path d="M12 3v2" />
+                              </svg>
+                              계산서 보기
+                            </button>
+                          )}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (rec.receiptData) {
+                                setSelectedReceipt(rec.receiptData);
+                              }
+                            }}
+                            className="flex-1 py-3 border border-gray-300 rounded-lg text-sm font-bold text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                              <polyline points="14 2 14 8 20 8" />
+                              <line x1="16" y1="13" x2="8" y2="13" />
+                              <line x1="16" y1="17" x2="8" y2="17" />
+                            </svg>
+                            영수증 상세
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -320,11 +525,20 @@ export default function VehicleManagementTab() {
         </button>
       </div>
 
-      {/* 영수증 모달 */}
+      {/* 영수증 텍스트 모달 */}
       {selectedReceipt && (
         <Receipt
           data={selectedReceipt}
           onClose={() => setSelectedReceipt(null)}
+        />
+      )}
+
+      {/* 영수증 이미지 모달 */}
+      {selectedReceiptImage && (
+        <ReceiptImageModal
+          imageUrl={selectedReceiptImage.url}
+          title={selectedReceiptImage.title}
+          onClose={() => setSelectedReceiptImage(null)}
         />
       )}
 

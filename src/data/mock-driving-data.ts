@@ -6,6 +6,15 @@ import type {
   ConsumableStatus,
   MaintenanceRecord,
   VehicleValueData,
+  DailyCostData,
+  SavingsData,
+  AIInsight,
+  StreakData,
+  DailyQuest,
+  Achievement,
+  EnergyPriceData,
+  ConsumableRisk,
+  RepairVsReplaceData,
 } from '@/types/driving-report';
 
 // ============================================
@@ -739,4 +748,148 @@ export const vehicleValueData: VehicleValueData = {
     { factor: '주행거리 78,500km', impact: '기준' },
     { factor: '차령 3년', impact: '기준' },
   ],
+};
+
+// ============================================
+// 비용관리 탭 데이터 (FMS P&L 일반차량 적용)
+// ============================================
+
+export const dailyCostData: DailyCostData = {
+  date: '2026-03-15',
+  totalCost: 12850,
+  costItems: [
+    { category: '충전비', icon: '⚡', amount: 5840, color: '#3b82f6' },
+    { category: '일일 감가', icon: '📉', amount: 3970, color: '#8b5cf6' },
+    { category: '소모품 마모', icon: '🔧', amount: 1480, color: '#f59e0b' },
+    { category: '보험료 (일할)', icon: '🛡️', amount: 1060, color: '#06b6d4' },
+    { category: '주차비', icon: '🅿️', amount: 500, color: '#64748b' },
+  ],
+  costRatio: 100,
+  costRatioTarget: 100,
+  healthScore: 87,
+  healthScoreChange: 2,
+};
+
+export const savingsData: SavingsData = {
+  monthlySavings: 48500,
+  todaySavings: 3200,
+  savingsSources: [
+    { label: '에코드라이빙 절감', amount: 28000 },
+    { label: '적시 정비 리스크 방지', amount: 12500 },
+    { label: '최적 충전 타이밍', amount: 8000 },
+  ],
+};
+
+export const aiInsights: AIInsight[] = [
+  {
+    id: 'ai-1',
+    message: '어제 급가속 3회 → 줄이면 월 12,000원 절감 가능',
+    savingsAmount: 12000,
+    category: 'eco',
+    icon: '💡',
+    actionable: true,
+  },
+  {
+    id: 'ai-2',
+    message: '이번 주 에너지 효율 8% 하락 — 타이어 공기압 점검 추천',
+    category: 'maintenance',
+    icon: '🔧',
+    actionable: true,
+  },
+];
+
+export const streakData: StreakData = {
+  currentStreak: 15,
+  bestStreak: 18,
+  weeklyChallenge: {
+    title: '급제동 0회 달성',
+    progress: 72,
+    reward: '+500P',
+  },
+  monthlyGoal: {
+    title: '차량비용 목표',
+    current: 285000,
+    target: 350000,
+    unit: '원',
+  },
+};
+
+export const dailyQuests: DailyQuest[] = [
+  { id: 'q-1', title: '에코존(60km/h) 10분 유지', points: 50, progress: 65, status: 'active' },
+  { id: 'q-2', title: '출발 전 타이어 점검', points: 40, progress: 0, status: 'active' },
+  { id: 'q-3', title: '회생제동 30% 이상 달성', points: 60, progress: 100, status: 'completed' },
+];
+
+export const achievements: Achievement[] = [
+  { id: 'ach-1', title: '10만원 절감', icon: '🎉', earned: true },
+  { id: 'ach-2', title: '30일 연속 점검', icon: '🔥', earned: false, progress: 50, target: '15/30일' },
+  { id: 'ach-3', title: '에너지효율 Top 10%', icon: '👑', earned: true },
+  { id: 'ach-4', title: '50만원 절감', icon: '💎', earned: false, progress: 78, target: '39만/50만원' },
+];
+
+export const energyPriceData: EnergyPriceData = {
+  currentPrice: 324.4,
+  priceChange: -5.2,
+  unit: 'kWh',
+  recommendation: 'charge_now',
+  nearestStation: {
+    name: '한전 강남 급속충전소',
+    price: 309.8,
+    distance: '300m',
+  },
+  weeklyTrend: [330, 328, 335, 332, 329, 326, 324],
+};
+
+// ============================================
+// 리스크 금액화 데이터 (FMS 유니크B 일반차량 적용)
+// ============================================
+
+export const consumableRisks: ConsumableRisk[] = [
+  {
+    consumableName: '에어컨필터',
+    currentStatus: '교체 주기 2,000km 초과',
+    damageProb: 8,
+    repairCost: 35000,
+    replaceCost: 250000,
+    totalRisk: 55000,
+    riskMultiplier: 7,
+  },
+  {
+    consumableName: '브레이크패드(전)',
+    currentStatus: '잔여 42% — 곧 교체 필요',
+    damageProb: 5,
+    repairCost: 85000,
+    replaceCost: 450000,
+    totalRisk: 107500,
+    riskMultiplier: 5,
+  },
+  {
+    consumableName: '엔진오일',
+    currentStatus: '교체 주기 1,500km 초과',
+    damageProb: 12,
+    repairCost: 85000,
+    replaceCost: 3500000,
+    totalRisk: 505000,
+    riskMultiplier: 41,
+  },
+];
+
+// ============================================
+// 수리 vs 교체 의사결정 데이터 (FMS 유니크C 일반차량 적용)
+// ============================================
+
+export const repairVsReplaceData: RepairVsReplaceData = {
+  currentVehicleValue: 31200000,
+  expectedRepairCost12m: 1850000,
+  newVehiclePrice: 52000000,
+  monthlyMaintCurrent: 285000,
+  monthlyMaintNew: 195000,
+  comparisonItems: [
+    { label: '차량 가치', keepValue: '3,120만원', replaceValue: '5,200만원 (신규)', replaceHighlight: false, keepHighlight: false },
+    { label: '12개월 예상 수리비', keepValue: '185만원', replaceValue: '20만원 (보증)', keepHighlight: true, replaceHighlight: false },
+    { label: '월 에너지비', keepValue: '12만원', replaceValue: '10.5만원', keepHighlight: false, replaceHighlight: false },
+    { label: '월 유지비 합계', keepValue: '28.5만원', replaceValue: '19.5만원', keepHighlight: true, replaceHighlight: false },
+  ],
+  recommendation: '현재 차량 상태 양호 — 12개월 더 유지 후 교체 시 매각가 최적',
+  optimalReplaceMonths: 12,
 };

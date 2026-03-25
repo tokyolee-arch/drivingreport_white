@@ -1,6 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import Badge from '@/components/shared/Badge';
+import { repairVsReplaceData } from '@/data/mock-driving-data';
 
 // ── 등급 설정 ──
 const GRADE = 'A';
@@ -37,6 +39,9 @@ const VALUE_FACTORS = [
 // ── 컴포넌트 ──
 
 export default function VehicleValueTab() {
+  const [showRepairVsReplace, setShowRepairVsReplace] = useState(false);
+  const rvr = repairVsReplaceData;
+
   return (
     <div className="flex flex-col gap-3">
       {/* ── 1. Vehicle Trust Grade 히어로 ── */}
@@ -212,7 +217,80 @@ export default function VehicleValueTab() {
         </div>
       </div>
 
-      {/* ── 5. CTA 버튼 2개 ── */}
+      {/* ── 5. 수리 vs 교체 의사결정 엔진 (FMS 유니크C 적용) ── */}
+      <div className="bg-ivi-surfaceLight rounded-xl border border-white/[0.06] overflow-hidden">
+        <button
+          onClick={() => setShowRepairVsReplace(!showRepairVsReplace)}
+          className="w-full p-5 flex items-center justify-between text-left"
+        >
+          <div>
+            <h3 className="text-sm font-bold text-gray-100">
+              🔄 수리 vs 교체 의사결정
+            </h3>
+            <p className="text-[10px] text-gray-500 mt-1">
+              이 차를 더 탈까, 바꿀까? 데이터 기반 분석
+            </p>
+          </div>
+          <svg
+            width="16" height="16" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" strokeWidth="2"
+            strokeLinecap="round" strokeLinejoin="round"
+            className={`text-gray-500 transition-transform duration-300 ${showRepairVsReplace ? 'rotate-180' : ''}`}
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+
+        {showRepairVsReplace && (
+          <div className="px-5 pb-5 border-t border-white/[0.04]">
+            {/* 비교 테이블 */}
+            <div className="mt-4 rounded-lg overflow-hidden border border-white/[0.06]">
+              {/* 테이블 헤더 */}
+              <div className="grid grid-cols-3 bg-white/[0.04]">
+                <div className="p-2.5 text-[10px] font-bold text-gray-500">비교 항목</div>
+                <div className="p-2.5 text-[10px] font-bold text-blue-400 text-center">현재 차량 유지</div>
+                <div className="p-2.5 text-[10px] font-bold text-emerald-400 text-center">차량 교체</div>
+              </div>
+
+              {/* 테이블 본문 */}
+              {rvr.comparisonItems.map((item, i) => (
+                <div
+                  key={item.label}
+                  className={`grid grid-cols-3 ${i < rvr.comparisonItems.length - 1 ? 'border-b border-white/[0.04]' : ''}`}
+                >
+                  <div className="p-2.5 text-[11px] text-gray-400">{item.label}</div>
+                  <div className={`p-2.5 text-[11px] text-center font-semibold ${item.keepHighlight ? 'text-red-400' : 'text-gray-300'}`}>
+                    {item.keepValue}
+                  </div>
+                  <div className={`p-2.5 text-[11px] text-center font-semibold ${item.replaceHighlight ? 'text-emerald-400' : 'text-gray-300'}`}>
+                    {item.replaceValue}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* AI 추천 */}
+            <div className="mt-4 bg-emerald-500/[0.08] border border-emerald-500/20 rounded-lg p-3">
+              <p className="text-[10px] font-bold text-emerald-400 mb-1">🤖 AI 추천</p>
+              <p className="text-[12px] text-gray-300">{rvr.recommendation}</p>
+            </div>
+
+            {/* 교체 최적 시점 카운트다운 */}
+            <div className="mt-3 flex items-center justify-center gap-2 bg-white/[0.03] rounded-lg py-3">
+              <span className="text-[11px] text-gray-500">교체 최적 시점까지</span>
+              <span className="text-lg font-extrabold text-blue-400">D-{rvr.optimalReplaceMonths * 30}</span>
+              <span className="text-[11px] text-gray-500">({rvr.optimalReplaceMonths}개월)</span>
+            </div>
+
+            {/* 정비로 매각가 올리기 팁 */}
+            <p className="text-[10px] text-gray-500 mt-3 text-center">
+              💡 지금 정비하면 매각 시 <span className="text-emerald-400 font-semibold">+120만원</span> 추가 가능
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* ── 6. CTA 버튼 2개 ── */}
       <div className="flex gap-2">
         {/* 리포트 공유 (gradient) */}
         <button
